@@ -1,0 +1,11 @@
+[Unit]
+Description=Blocky DNS AD blocker
+Requires=network.target
+After=network-online.target
+
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/blocky --config /etc/blocky.yml
+
+[Install]
+WantedBy=multi-user.target

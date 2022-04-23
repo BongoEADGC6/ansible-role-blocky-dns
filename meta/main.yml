@@ -1,0 +1,32 @@
+galaxy_info:
+  role_name: blocky_dns
+  author: kshcherban
+  company: null
+  description: Manage Blocky DNS (github.com/0xERR0R/blocky) AD blocker
+  issue_tracker_url: https://github.com/kshcherban/ansible-role-blocky-dns/issues
+  license: MIT
+  min_ansible_version: 2.7
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  - name: Archlinux
+    versions:
+    - all
+  - name: EL
+    versions:
+    - all
+  - name: OpenSuse
+    versions:
+    - all
+  galaxy_tags:
+  - system
+  - dns
+  - networking
+  - adblocking
+  - blocky
+
+dependencies: []

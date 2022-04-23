@@ -1,0 +1,15 @@
+blocky_dns_version: "0.18"
+blocky_dns_resolvers:
+  - tcp-tls:1.1.1.1:853
+  - tcp-tls:8.8.8.8:853
+blocky_dns_blacklists:
+  - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+  - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+  - https://github.com/Ewpratten/youtube_ad_blocklist/blob/master/blocklist.txt
+  - https://raw.githubusercontent.com/CitizenXVIL/Hosts/master/Youtube%20hosts.txt
+  - https://dbl.oisd.nl/
+blocky_dns_port: 53
+blocky_http_port: 4000
+blocky_tls_port: null
+blocky_log_level: null
+blocky_log_privacy: false

@@ -1,0 +1,23 @@
+upstream:
+  default:
+{% for resolver in blocky_dns_resolvers %}
+    - {{ resolver }}
+{% endfor %}
+blocking:
+  blackLists:
+    ads:
+{% for blist in blocky_dns_blacklists %}
+      - {{ blist }}
+{% endfor %}
+  clientGroupsBlock:
+    default:
+      - ads
+port: {{ blocky_dns_port }}
+httpPort: {{ blocky_http_port }}
+{% if blocky_tls_port %}
+tlsPort: {{ blocky_tls_port }}
+{% endif %}
+{% if blocky_log_level %}
+logLevel: {{ blocky_log_level }}
+{% endif %}
+logPrivacy: {{ blocky_log_privacy | string | lower }}

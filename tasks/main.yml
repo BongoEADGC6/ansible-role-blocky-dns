@@ -1,0 +1,52 @@
+- name: Create blocky config
+  become: yes
+  template:
+    src: config.yml.j2
+    dest: /etc/blocky.yml
+    mode: 0644
+  notify:
+    - restart blocky
+
+- name: Download blocky
+  unarchive:
+    src: "https://github.com/0xERR0R/blocky/releases/download/v{{ blocky_dns_version }}/blocky_{{ blocky_dns_version }}_Linux_{{ (ansible_machine == 'aarch64') | ternary('arm64', 'x86_64') }}.tar.gz"
+    dest: "{{ ansible_env.HOME }}"
+    mode: 0755
+    remote_src: yes
+    exclude:
+      - LICENSE
+      - README.md
+    extra_opts:
+      - --transform
+      - "s/blocky/blocky-{{ blocky_dns_version }}/"
+    creates: "{{ ansible_env.HOME }}/blocky-{{ blocky_dns_version }}"
+  check_mode: false
+
+- name: Create symlink in bin
+  become: yes
+  file:
+    src: "{{ ansible_env.HOME }}/blocky-{{ blocky_dns_version }}"
+    dest: /usr/local/bin/blocky
+    owner: root
+    group: root
+    state: link
+    force: true
+
+- name: Install blocky systemd unit file
+  become: yes
+  template:
+    src: blocky.service.j2
+    dest: /etc/systemd/system/blocky.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart blocky
+
+- name: Start blocky
+  become: yes
+  systemd:
+    name: blocky
+    state: started
+    daemon_reload: true
+    enabled: true
