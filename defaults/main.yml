@@ -1,4 +1,5 @@
 blocky_dns_version: "0.18"
+blocky_config: null
 blocky_dns_resolvers:
   - tcp-tls:1.1.1.1:853
   - tcp-tls:8.8.8.8:853

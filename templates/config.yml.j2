@@ -1,3 +1,8 @@
+{# If blocky_config is set, render as full config #}
+{% if blocky_config %}
+{{ blocky_config | to_yaml }}
+{% else %}
+{# If blocky_config is not set, read vars for basic setup #}
 upstream:
   default:
 {% for resolver in blocky_dns_resolvers %}
@@ -21,3 +26,5 @@ tlsPort: {{ blocky_tls_port }}
 logLevel: {{ blocky_log_level }}
 {% endif %}
 logPrivacy: {{ blocky_log_privacy | string | lower }}
+
+{% endif %}

@@ -1,11 +1,19 @@
 [Unit]
-Description=Blocky DNS AD blocker
-Requires=network.target
-After=network-online.target
+Description=Blocky is a DNS proxy and ad-blocker
+ConditionPathExists=/opt/blocky
+After=local-fs.target
 
 [Service]
-Restart=always
-ExecStart=/usr/local/bin/blocky --config /etc/blocky.yml
+User=blocky
+Group=blocky
+Type=simple
+WorkingDirectory=/opt/blocky
+ExecStart=/opt/blocky/blocky --config /etc/blocky/config.yaml
+Restart=on-failure
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=blocky
 
 [Install]
 WantedBy=multi-user.target
